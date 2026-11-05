@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>solidcraft-studio: design in SolidCraft, then print, render or texture</title>
+<meta name="description" content="An Agent Skill that models in SolidCraft through MCP, checks prints for the Bambu H2C in OrcaSlicer, renders and explodes models in Blender, and textures them with MaterialCraft and TextureCraft.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="solidcraft-studio">
+<meta property="og:description" content="Model in SolidCraft. Print-check for the H2C, render and animate in Blender, texture with MaterialCraft and TextureCraft.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js" integrity="sha256-d07doh4b4qCTTkYMpZQ68f4/iNoTCp+YvWqdYRV2ys8=" crossorigin="anonymous"></script>
+<style>
+:root{--bg:#f3f1ee;--ink:#1a1714;--mute:#5a534c;--accent:#0f6b8a;--card:#fff;--line:rgba(26,23,20,.16);--stage:#e8ecf8}
+@media (prefers-color-scheme:dark){:root{--bg:#14171a;--ink:#f1f3f4;--mute:#a9b4ba;--accent:#5cc3e4;--card:#1d2226;--line:rgba(241,243,244,.18);--stage:#e8ecf8}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 18px/1.55 "Segoe UI",system-ui,-apple-system,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+header{padding:28px 0 8px;display:flex;justify-content:space-between;align-items:center;font-weight:700}
+header nav a{margin-left:18px;font-weight:500;text-decoration:none}
+.hero{padding:40px 0 24px;display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center}
+h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.05;letter-spacing:-.02em;margin:0 0 16px}
+h2{font-size:1.7rem;letter-spacing:-.01em;margin:0 0 12px}
+h3{margin:0 0 6px;font-size:1.2rem}
+.lead{color:var(--mute);font-size:1.2rem;margin:0 0 20px}
+.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;font-weight:600;text-decoration:none;margin:0 10px 10px 0}
+.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--ink);padding:8px 16px}
+.stage{background:var(--stage);border:1px solid var(--line);margin:0}
+.stage img,.stage model-viewer{display:block;width:100%;height:auto}
+.stage model-viewer{height:380px;--poster-color:transparent}
+.stage figcaption{background:var(--card);padding:8px 12px;font-size:.88rem;color:var(--mute);border-top:1px solid var(--line)}
+section{padding:36px 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+.card{background:var(--card);border:1px solid var(--line);padding:16px}
+.card p{margin:0;color:var(--mute);font-size:.98rem}
+ol.steps{padding-left:1.2em}
+ol.steps li{margin:8px 0}
+pre{background:var(--card);border:1px solid var(--line);padding:14px;overflow-x:auto;font-size:.9rem;line-height:1.45}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.92em}
+table{border-collapse:collapse;width:100%;background:var(--card);font-size:1rem;margin:8px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+footer{padding:36px 0 60px;color:var(--mute);font-size:.95rem}
+@media (max-width:820px){.hero,.grid,.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><span>solidcraft-studio</span><nav><a href="#finishes">Finishes</a><a href="#examples">Examples</a><a href="#install">Install</a><a href="https://github.com/shadowtor/solidcraft-studio">GitHub</a></nav></header>
+
+<div class="hero">
+<div>
+<h1>Model it once. Print it, render it or texture it.</h1>
+<p class="lead">An Agent Skill that designs parts in SolidCraft through its MCP server, then finishes them: checked in OrcaSlicer for a Bambu H2C, rendered and exploded in Blender, or textured with MaterialCraft and TextureCraft.</p>
+<a class="btn" href="#install">Install</a><a class="btn alt" href="https://github.com/shadowtor/solidcraft-studio">View source</a>
+</div>
+<figure class="stage"><img src="examples/exploded-view/exploded.gif" alt="A three-part assembly separating along its vertical axis and closing again" width="440" height="440"><figcaption>An exploded view of a SolidCraft assembly, rendered by the skill in Blender 5.2.</figcaption></figure>
+</div>
+
+<section id="finishes">
+<h2>Pick the finish</h2>
+<p class="lead">The skill asks which one you want before it models, because it changes the tolerances.</p>
+<div class="grid">
+<div class="card"><h3>Print</h3><p>Fits and wall limits scaled to your nozzle (0.2, 0.4, 0.6) and filament (PLA, PETG, ASA, Bambu profiles). Sliced for the H2C on the build plate you name. Supports are designed away first. When they stay, a tight, solid interface lets them peel off clean.</p></div>
+<div class="card"><h3>Render</h3><p>Blender builds the scene, backdrop and lights, and animates exploded views as PNG, MP4 or GIF. Glass and acrylic render in Cycles. EffectCraft adds titles, camera moves and audio.</p></div>
+<div class="card"><h3>Textured</h3><p>PBR maps from MaterialCraft, projected or UV-mapped in TextureCraft, baked, painted and exported as maps or a GLB for vinyl-toy and game assets.</p></div>
+</div>
+</section>
+
+<section id="examples">
+<h2>What was run</h2>
+<p class="lead">Every row below was run on a Windows machine with SolidCraft 0.30.1, OrcaSlicer, Blender 5.2.3 and the Craft apps. Nothing was printed.</p>
+
+<h3>Textured model</h3>
+<p>A SolidCraft assembly given a MaterialCraft metal-plate material through TextureCraft, with baked AO and curvature, exported as a GLB. Drag it to turn it.</p>
+<div class="two">
+<figure class="stage"><model-viewer src="examples/textured-crate/textured.glb" alt="Interactive textured 3D assembly" camera-controls touch-action="pan-y" auto-rotate shadow-intensity="1" environment-image="neutral" reveal="auto" loading="lazy"></model-viewer><figcaption>The exported GLB, about 2 MB.</figcaption></figure>
+<figure class="stage"><img src="examples/textured-crate/maps.png" alt="Base colour, normal and roughness maps next to the textured cube" width="600" height="150" loading="lazy"><figcaption>MaterialCraft maps and the textured result.</figcaption></figure>
+</div>
+
+<h3>Acrylic lid, exploded</h3>
+<div class="two">
+<figure class="stage"><img src="examples/exploded-view/hero.png" alt="A base, post and glass lid spread apart" width="500" height="500" loading="lazy"><figcaption>Cycles render with a glass lid.</figcaption></figure>
+<figure class="stage"><img src="examples/exploded-view/exploded.gif" alt="The same parts closing and opening" width="500" height="500" loading="lazy"><figcaption>The animation, staggered and eased.</figcaption></figure>
+</div>
+
+<table>
+<tr><th>Check</th><th>Result</th></tr>
+<tr><td>Print slicing</td><td>The H2C with 0.2, 0.4 and 0.6 mm nozzles, six build plates with different bed temperatures, and PLA, PETG and ASA. A ledge part needs supports and a plain block does not</td></tr>
+<tr><td>Clean supports</td><td>The tight-interface preset slices. A second filament as the support interface also slices, as an estimate only</td></tr>
+<tr><td>Render</td><td>Headless and live Blender, Cycles glass, MP4 and GIF</td></tr>
+<tr><td>Textures</td><td>MaterialCraft maps, triplanar projection, UV projection, baking, painting, decals and a GLB opened in Blender</td></tr>
+<tr><td>Effects</td><td>EffectCraft MP4 with a title and vignette, GPU render, 3D layers, a camera move and AAC audio</td></tr>
+<tr><td><strong>Not proven</strong></td><td>A real print. A test print is the only proof the fit offsets and support settings hold on your printer. Unreal and Unity import, EffectCraft's live-app bridge and <code>.mcmat</code> sharing are untried</td></tr>
+</table>
+</section>
+
+<section id="how">
+<h2>How a session goes</h2>
+<ol class="steps">
+<li><strong>Connect.</strong> The skill talks to <code>solidcraft-cli mcp</code> over stdio, limited to your project folder.</li>
+<li><strong>Brief.</strong> You pick the finish, give sizes and materials. Missing numbers become named parameters with a stated assumption.</li>
+<li><strong>Build.</strong> Parametric commands, a screenshot after each step, and measurements checked against the brief.</li>
+<li><strong>Finish.</strong> Print: <code>slicer_check.py</code> slices it for your nozzle, plate and filament. Render: Blender or EffectCraft. Textured: MaterialCraft then TextureCraft.</li>
+<li><strong>Hand over.</strong> Files, parameters, assumptions and what has not been proven.</li>
+</ol>
+</section>
+
+<section id="install">
+<h2>Install</h2>
+<p>You need <a href="https://solidcraft.io/">SolidCraft</a>, Python 3.8+ and an agent that reads skills. OrcaSlicer with Bambu Studio installed (for its profiles), Blender, ffmpeg and the other Craft apps are optional and only enable their finish.</p>
+<p>In Claude Code:</p>
+<pre>/plugin marketplace add shadowtor/solidcraft-studio
+/plugin install solidcraft-studio@solidcraft-studio</pre>
+<p>Or with the installer:</p>
+<pre>git clone https://github.com/shadowtor/solidcraft-studio.git
+cd solidcraft-studio
+python tools/install.py --claude --codex     # or --gemini, or --rules for Cursor and Copilot
+python skills/solidcraft-studio/scripts/check_setup.py</pre>
+<p>Start a new session, then ask for something to build.</p>
+</section>
+
+<footer>MIT licence. Not affiliated with Tangency Labs, Bambu Lab, OrcaSlicer or the Blender Foundation. All product names belong to their owners.</footer>
+</div>
+</body>
+</html>

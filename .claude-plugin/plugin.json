@@ -1,0 +1,22 @@
+{
+  "name": "solidcraft-studio",
+  "description": "Design 3D models in SolidCraft through its local MCP server, then finish them as H2C-checked 3D prints (PLA/PETG/ASA), Blender or EffectCraft renders and animations, or MaterialCraft/TextureCraft textured models.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Shadowtor",
+    "url": "https://github.com/shadowtor"
+  },
+  "license": "MIT",
+  "keywords": [
+    "solidcraft",
+    "cad",
+    "3d-printing",
+    "orcaslicer",
+    "bambu",
+    "mcp",
+    "blender",
+    "textures"
+  ],
+  "homepage": "https://github.com/shadowtor/solidcraft-studio",
+  "repository": "https://github.com/shadowtor/solidcraft-studio"
+}

@@ -1,0 +1,28 @@
+{
+  "name": "solidcraft-studio",
+  "owner": {
+    "name": "Shadowtor",
+    "url": "https://github.com/shadowtor"
+  },
+  "metadata": {
+    "description": "Design in SolidCraft, then print-check for the H2C, render, animate or texture.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "solidcraft-studio",
+      "source": "./",
+      "description": "Models in SolidCraft through its MCP, finished as H2C-checked 3D prints (PLA/PETG/ASA, OrcaSlicer, clean supports), Blender or EffectCraft renders and exploded views, or MaterialCraft and TextureCraft textured models.",
+      "version": "0.1.0",
+      "category": "design",
+      "keywords": [
+        "solidcraft",
+        "3d-printing",
+        "orcaslicer",
+        "bambu",
+        "blender",
+        "textures"
+      ]
+    }
+  ]
+}

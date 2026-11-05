@@ -1,0 +1,213 @@
+{
+  "_about": "Per-material design starting points for FDM on a 0.4 mm nozzle. Single source for scripts/print_profile.py and references/materials.md. Values marked 'default' are conservative starting values chosen by this project, not published figures: calibrate with a fit coupon on the real printer and filament brand. No temperatures or slicer settings live here on purpose: keep those in the slicer profile.",
+  "_sources": {
+    "fits": "Markforged design tips: press 0.00-0.05, close 0.05-0.10, free 0.10-0.20 mm, all DIAMETRAL (total across both sides), for their printers",
+    "overhang": "All3DP: under 45 to 60 degrees from vertical, or protruding under 5 mm into air",
+    "wall": "Objective3D: about 1 to 2 mm minimum, thicker for load",
+    "process": "HazAT codex-fusion-360: keep fit allowance separate from material compensation, no global shrink factor, test with a coupon"
+  },
+  "fit_base_diametral_mm": {
+    "_note": "Diametral clearance added between mating parts on a hobby 0.4 mm FDM printer before the material offset. Markforged published values are tighter because their machines are tighter.",
+    "press": 0.1,
+    "close": 0.25,
+    "free": 0.4
+  },
+  "materials": {
+    "PLA": {
+      "fit_offset_mm": 0.0,
+      "min_wall_mm": 1.2,
+      "min_feature_mm": 0.8,
+      "overhang_max_deg": 55,
+      "bridge_max_mm": 30,
+      "hole_comp_mm": 0.15,
+      "enclosure": false,
+      "snap_fit": "poor: brittle, thin snaps crack",
+      "creep": "low",
+      "notes": [
+        "Softens in a hot car or near heat, so keep it away from sun-exposed or heated uses.",
+        "Cools fast, so it tolerates the steepest overhangs and longest bridges of the common filaments.",
+        "Brittle: use fillets and thicker snap arms."
+      ],
+      "slicer": {
+        "bbl_filament": "Bambu PLA Basic",
+        "bed": "Textured PEI Plate"
+      }
+    },
+    "PETG": {
+      "fit_offset_mm": 0.05,
+      "min_wall_mm": 1.2,
+      "min_feature_mm": 0.8,
+      "overhang_max_deg": 45,
+      "bridge_max_mm": 20,
+      "hole_comp_mm": 0.2,
+      "enclosure": false,
+      "snap_fit": "good: tough and flexible",
+      "creep": "moderate: keep long-term loads low",
+      "notes": [
+        "Strings and sags more than PLA on bridges and overhangs.",
+        "Sticks hard to smooth plates, so avoid large flat bed-contact faces on mating surfaces.",
+        "Good for keychains, clips and snap fits."
+      ],
+      "slicer": {
+        "bbl_filament": "Bambu PETG Basic",
+        "bed": "Textured PEI Plate"
+      }
+    },
+    "ABS": {
+      "fit_offset_mm": 0.1,
+      "min_wall_mm": 1.2,
+      "min_feature_mm": 0.8,
+      "overhang_max_deg": 45,
+      "bridge_max_mm": 20,
+      "hole_comp_mm": 0.2,
+      "enclosure": true,
+      "snap_fit": "good",
+      "creep": "low",
+      "notes": [
+        "Warps: avoid long flat bed faces and sharp corners, fillet or chamfer edges normal to the bed.",
+        "Print enclosed. Ventilate: it emits fumes.",
+        "All3DP: for a wider part, PETG or nylon may print more reliably."
+      ],
+      "slicer": {
+        "bbl_filament": "Bambu ABS",
+        "bed": "Engineering Plate"
+      }
+    },
+    "ASA": {
+      "fit_offset_mm": 0.1,
+      "min_wall_mm": 1.2,
+      "min_feature_mm": 0.8,
+      "overhang_max_deg": 45,
+      "bridge_max_mm": 20,
+      "hole_comp_mm": 0.2,
+      "enclosure": true,
+      "snap_fit": "good",
+      "creep": "low",
+      "notes": [
+        "Like ABS but UV stable: the choice for outdoor and car-exterior parts.",
+        "Warps without an enclosure. The H2C heated chamber helps, but still round corners and avoid long flat bed faces.",
+        "Ventilate: it emits fumes."
+      ],
+      "slicer": {
+        "bbl_filament": "Bambu ASA",
+        "bed": "Engineering Plate"
+      }
+    },
+    "TPU": {
+      "fit_offset_mm": 0.1,
+      "min_wall_mm": 1.6,
+      "min_feature_mm": 1.2,
+      "overhang_max_deg": 35,
+      "bridge_max_mm": 10,
+      "hole_comp_mm": 0.2,
+      "enclosure": false,
+      "snap_fit": "n/a: the part itself flexes",
+      "creep": "n/a",
+      "notes": [
+        "Flexible: design for compression, not rigid fits. Wall thickness sets the stiffness.",
+        "Avoid thin tall features and long bridges.",
+        "Hole and slot clearances close up when the part flexes: test by hand."
+      ],
+      "slicer": {
+        "bbl_filament": "Bambu TPU 95A",
+        "bed": "Textured PEI Plate"
+      }
+    },
+    "PA": {
+      "fit_offset_mm": 0.15,
+      "min_wall_mm": 1.6,
+      "min_feature_mm": 1.0,
+      "overhang_max_deg": 40,
+      "bridge_max_mm": 15,
+      "hole_comp_mm": 0.25,
+      "enclosure": true,
+      "snap_fit": "good: tough",
+      "creep": "low",
+      "notes": [
+        "Nylon absorbs water: print from dry filament and expect small size changes in humid use.",
+        "Warps strongly: round corners, avoid big flat faces, print enclosed."
+      ],
+      "slicer": {
+        "bbl_filament": "Generic PA",
+        "bed": "Engineering Plate"
+      }
+    },
+    "PC": {
+      "fit_offset_mm": 0.1,
+      "min_wall_mm": 1.6,
+      "min_feature_mm": 1.0,
+      "overhang_max_deg": 40,
+      "bridge_max_mm": 15,
+      "hole_comp_mm": 0.2,
+      "enclosure": true,
+      "snap_fit": "good",
+      "creep": "low",
+      "notes": [
+        "High heat resistance and strength, very high warp risk.",
+        "Needs a hardened or high-temperature capable hotend: the H2C hotend reaches 350 C."
+      ],
+      "slicer": {
+        "bbl_filament": "Bambu PC",
+        "bed": "Engineering Plate"
+      }
+    },
+    "PLA-CF": {
+      "fit_offset_mm": -0.05,
+      "min_wall_mm": 1.2,
+      "min_feature_mm": 1.0,
+      "overhang_max_deg": 50,
+      "bridge_max_mm": 20,
+      "hole_comp_mm": 0.15,
+      "enclosure": false,
+      "snap_fit": "poor: stiff and brittle",
+      "creep": "low",
+      "notes": [
+        "Carbon-filled: stiff, low warp and shrink, matte finish, abrasive: needs a hardened nozzle.",
+        "Fibres align with the toolpath, so strength is highest in the XY plane: put the main load across XY (Markforged makes the same point for composites).",
+        "Do not use for snap fits or thin hooks."
+      ],
+      "slicer": {
+        "bbl_filament": "Bambu PLA-CF",
+        "bed": "Textured PEI Plate"
+      }
+    },
+    "PETG-CF": {
+      "fit_offset_mm": 0.0,
+      "min_wall_mm": 1.2,
+      "min_feature_mm": 1.0,
+      "overhang_max_deg": 45,
+      "bridge_max_mm": 15,
+      "hole_comp_mm": 0.15,
+      "enclosure": false,
+      "snap_fit": "fair: stiffer and less forgiving than PETG",
+      "creep": "low",
+      "notes": [
+        "Carbon-filled PETG: stiffer, less stringing, abrasive: needs a hardened nozzle.",
+        "Strongest in the XY plane."
+      ],
+      "slicer": {
+        "bbl_filament": "Bambu PETG-CF",
+        "bed": "Textured PEI Plate"
+      }
+    },
+    "PA-CF": {
+      "fit_offset_mm": 0.0,
+      "min_wall_mm": 1.6,
+      "min_feature_mm": 1.0,
+      "overhang_max_deg": 40,
+      "bridge_max_mm": 15,
+      "hole_comp_mm": 0.2,
+      "enclosure": true,
+      "snap_fit": "poor: stiff",
+      "creep": "low",
+      "notes": [
+        "Carbon-filled nylon: stiff, strong, low warp compared with plain nylon, abrasive.",
+        "Dry the filament, print enclosed, strongest in the XY plane."
+      ],
+      "slicer": {
+        "bbl_filament": "Bambu PA-CF",
+        "bed": "Engineering Plate"
+      }
+    }
+  }
+}

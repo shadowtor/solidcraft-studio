@@ -1,0 +1,17 @@
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+__pycache__/
+*.pyc
+.venv/
+dist/
+*.zip
+*.log
+_work/
+_site/
+*.blend1
+.env
+.env.*
+*.pem
